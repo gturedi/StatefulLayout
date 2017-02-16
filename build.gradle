@@ -1,0 +1,30 @@
+buildscript {
+
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.3.0-beta3'
+        classpath 'com.jakewharton:butterknife-gradle-plugin:8.5.1'
+    }
+
+}
+
+allprojects {
+
+    repositories {
+        jcenter()
+        maven { url "https://jitpack.io" }
+    }
+
+    tasks.withType(JavaCompile) {
+        sourceCompatibility = "1.7"
+        targetCompatibility = "1.7"
+    }
+
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
