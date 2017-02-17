@@ -48,7 +48,7 @@ public class StatefulLayout
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        if(getChildCount() != 1) throw new IllegalStateException("StatefulLayout must have one child!");
+        if (getChildCount() != 1) throw new IllegalStateException("StatefulLayout must have one child!");
         setOrientation(VERTICAL);
         if (isInEditMode()) return;
         //setGravity(Gravity.CENTER);
@@ -67,7 +67,7 @@ public class StatefulLayout
     }
 
     public void showLoading() {
-        showLoading(null);
+        showLoading("");
     }
 
     public void showLoading(@StringRes int resId) {
@@ -77,15 +77,30 @@ public class StatefulLayout
     public void showLoading(String message) {
         hide();
         stProgress.setVisibility(VISIBLE);
-        if (TextUtils.isEmpty(message)) return;
-        stMessage.setVisibility(VISIBLE);
-        stMessage.setText(message);
+        if (!TextUtils.isEmpty(message)) {
+            stMessage.setVisibility(VISIBLE);
+            stMessage.setText(message);
+        }
     }
 
     public void showEmpty() {
+        showEmpty("");
+    }
+
+    public void showEmpty(@StringRes int resId) {
+        showLoading(getContext().getString(resId));
+    }
+
+    public void showEmpty(String message) {
         hide();
         stImage.setVisibility(VISIBLE);
+        stImage.setImageResource(R.drawable.st_ic_empty);
         stMessage.setVisibility(VISIBLE);
+        if (TextUtils.isEmpty(message)) {
+            stMessage.setText(R.string.slEmptyMessage);
+        } else {
+            stMessage.setText(message);
+        }
     }
 
     public void hide() {
