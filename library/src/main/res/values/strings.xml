@@ -1,2 +1,7 @@
 <resources>
+    <string name="slErrorMessage">An error occurred please try again later</string>
+    <string name="slOfflineMessage">Please check your connection</string>
+    <string name="slEmptyMessage">There are no items</string>
+    <string name="slLoadingMessage">Loading..</string>
+    <string name="slRetry">Retry</string>
 </resources>
