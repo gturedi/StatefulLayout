@@ -3,6 +3,7 @@ package com.gturedi.app;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Toast;
 
 import com.gturedi.views.StatefulLayout;
 
@@ -30,6 +31,16 @@ public class MainActivity
     }
 
     public void empty(View view) {
-        stateful.showEmpty();
+        stateful.showError(null);
     }
+
+    public void error(View view) {
+        stateful.showError(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(MainActivity.this, "click!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 }

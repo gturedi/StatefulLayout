@@ -71,7 +71,7 @@ public class StatefulLayout
     }
 
     public void showLoading(@StringRes int resId) {
-        showLoading(getContext().getString(resId));
+        showLoading(str(resId));
     }
 
     public void showLoading(String message) {
@@ -88,7 +88,7 @@ public class StatefulLayout
     }
 
     public void showEmpty(@StringRes int resId) {
-        showLoading(getContext().getString(resId));
+        showEmpty(str(resId));
     }
 
     public void showEmpty(String message) {
@@ -103,13 +103,48 @@ public class StatefulLayout
         }
     }
 
-    public void hide() {
+    public void showError(Runnable runnable) {
+        showError("", runnable);
+    }
+
+    public void showError(@StringRes int resId, Runnable runnable) {
+        showError(str(resId), runnable);
+    }
+
+    public void showError(String message, final Runnable runnable) {
+        hide();
+        stImage.setVisibility(VISIBLE);
+        stImage.setImageResource(R.drawable.sl_ic_error);
+        stMessage.setVisibility(VISIBLE);
+        if (TextUtils.isEmpty(message)) {
+            stMessage.setText(R.string.slErrorMessage);
+        } else {
+            stMessage.setText(message);
+        }
+        if (runnable == null) {
+            stButton.setVisibility(GONE);
+        } else {
+            stButton.setVisibility(VISIBLE);
+            stButton.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    runnable.run();
+                }
+            });
+        }
+    }
+
+    private void hide() {
         content.setVisibility(GONE);
         stContainer.setVisibility(VISIBLE);
         stProgress.setVisibility(GONE);
         stImage.setVisibility(GONE);
         stMessage.setVisibility(GONE);
         stButton.setVisibility(GONE);
+    }
+
+    private String str(@StringRes int resId) {
+        return getContext().getString(resId);
     }
 
 }
