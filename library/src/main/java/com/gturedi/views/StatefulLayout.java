@@ -67,6 +67,8 @@ public class StatefulLayout
         stContainer.setVisibility(GONE);
     }
 
+    // loading //
+
     public void showLoading() {
         showLoading("");
     }
@@ -84,37 +86,87 @@ public class StatefulLayout
         }
     }
 
+    // empty //
+
     public void showEmpty() {
-        showStateByType(ErrorStateType.EMPTY, "", null);
+        showEmpty("");
     }
 
     public void showEmpty(@StringRes int resId) {
-        showStateByType(ErrorStateType.EMPTY, "", null);
+        showEmpty(str(resId));
     }
 
+    public void showEmpty(String message) {
+        showStateByType(ErrorStateType.EMPTY, message, null);
+    }
+
+    // error //
+
     public void showError(Runnable clickAction) {
-        showStateByType(ErrorStateType.ERROR, "", clickAction);
+        showError("", clickAction);
     }
 
     public void showError(@StringRes int resId, Runnable clickAction) {
-        showStateByType(ErrorStateType.ERROR, str(resId), clickAction);
+        showError(str(resId), clickAction);
     }
 
+    public void showError(String message, Runnable clickAction) {
+        showStateByType(ErrorStateType.ERROR, message, clickAction);
+    }
+
+    // offline
+
     public void showOffline(Runnable clickAction) {
-        showStateByType(ErrorStateType.OFFLINE, "", clickAction);
+        showOffline("", clickAction);
     }
 
     public void showOffline(@StringRes int resId, Runnable clickAction) {
-        showStateByType(ErrorStateType.OFFLINE, str(resId), clickAction);
+        showOffline(str(resId), clickAction);
     }
 
+    public void showOffline(String message, Runnable clickAction) {
+        showStateByType(ErrorStateType.OFFLINE, message, clickAction);
+    }
+
+    // location off //
+
     public void showLocationOff(Runnable clickAction) {
-        showStateByType(ErrorStateType.LOCATION_OFF, "", clickAction);
+        showLocationOff("", clickAction);
     }
 
     public void showLocationOff(@StringRes int resId, Runnable clickAction) {
-        showStateByType(ErrorStateType.LOCATION_OFF, str(resId), clickAction);
+        showLocationOff(str(resId), clickAction);
     }
+
+    public void showLocationOff(String message, Runnable clickAction) {
+        showStateByType(ErrorStateType.LOCATION_OFF, message, clickAction);
+    }
+
+    // custom //
+
+    public void showCustom(CustomStateOptions options) {
+        initSate();
+
+        if (options.getImageRes() != 0) {
+            stImage.setVisibility(VISIBLE);
+            stImage.setImageResource(options.getImageRes());
+        }
+
+        if (!TextUtils.isEmpty(options.getMessage())) {
+            stMessage.setVisibility(VISIBLE);
+            stMessage.setText(options.getMessage());
+        }
+
+        if (options.getButtonAction() != null) {
+            stButton.setVisibility(VISIBLE);
+            stImage.setImageResource(options.getImageRes());
+            if (!TextUtils.isEmpty(options.getButtonText())) {
+                stButton.setText(options.getButtonText());
+            }
+        }
+    }
+
+    // helper methods //
 
     private void showStateByType(ErrorStateType type, String message, final Runnable clickAction) {
         initSate();
@@ -138,28 +190,6 @@ public class StatefulLayout
                     clickAction.run();
                 }
             });
-        }
-    }
-
-    public void showCustom(CustomStateOptions options) {
-        initSate();
-
-        if (options.getImageRes() != 0) {
-            stImage.setVisibility(VISIBLE);
-            stImage.setImageResource(options.getImageRes());
-        }
-
-        if (!TextUtils.isEmpty(options.getMessage())) {
-            stMessage.setVisibility(VISIBLE);
-            stMessage.setText(options.getMessage());
-        }
-
-        if (options.getButtonAction() != null) {
-            stButton.setVisibility(VISIBLE);
-            stImage.setImageResource(options.getImageRes());
-            if (!TextUtils.isEmpty(options.getButtonText())) {
-                stButton.setText(options.getButtonText());
-            }
         }
     }
 
