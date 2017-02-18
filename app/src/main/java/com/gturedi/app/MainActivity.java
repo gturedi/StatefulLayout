@@ -31,7 +31,7 @@ public class MainActivity
     }
 
     public void empty(View view) {
-        stateful.showError(null);
+        stateful.showEmpty();
     }
 
     public void error(View view) {
@@ -45,6 +45,15 @@ public class MainActivity
 
     public void offline(View view) {
         stateful.showOffline(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(MainActivity.this, "click!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void locationOff(View view) {
+        stateful.showLocationOff(new Runnable() {
             @Override
             public void run() {
                 Toast.makeText(MainActivity.this, "click!", Toast.LENGTH_SHORT).show();

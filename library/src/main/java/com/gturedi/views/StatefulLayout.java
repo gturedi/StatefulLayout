@@ -163,6 +163,36 @@ public class StatefulLayout
             });
         }
     }
+    public void showLocationOff(Runnable runnable) {
+        showLocationOff("", runnable);
+    }
+
+    public void showLocationOff(@StringRes int resId, Runnable runnable) {
+        showLocationOff(str(resId), runnable);
+    }
+
+    public void showLocationOff(String message, final Runnable runnable) {
+        initSate();
+        stImage.setVisibility(VISIBLE);
+        stImage.setImageResource(R.drawable.ic_location_off);
+        stMessage.setVisibility(VISIBLE);
+        if (TextUtils.isEmpty(message)) {
+            stMessage.setText(R.string.slLocationOffMessage);
+        } else {
+            stMessage.setText(message);
+        }
+        if (runnable == null) {
+            stButton.setVisibility(GONE);
+        } else {
+            stButton.setVisibility(VISIBLE);
+            stButton.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    runnable.run();
+                }
+            });
+        }
+    }
 
     private void initSate() {
         content.setVisibility(GONE);
