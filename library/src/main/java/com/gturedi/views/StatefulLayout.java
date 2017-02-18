@@ -19,6 +19,8 @@ import android.widget.TextView;
 public class StatefulLayout
         extends LinearLayout {
 
+    private static final String MSG_ONE_CHILD = "StatefulLayout must have one child!";
+
     private LinearLayout stContainer;
     private ProgressBar stProgress;
     private ImageView stImage;
@@ -48,7 +50,7 @@ public class StatefulLayout
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        if (getChildCount() != 1) throw new IllegalStateException("StatefulLayout must have one child!");
+        if (getChildCount() != 1) throw new IllegalStateException(MSG_ONE_CHILD);
         setOrientation(VERTICAL);
         if (isInEditMode()) return; // to initSate state views in designer
         content = getChildAt(0);
@@ -136,6 +138,28 @@ public class StatefulLayout
                     clickAction.run();
                 }
             });
+        }
+    }
+
+    public void showCustom(CustomStateOptions options) {
+        initSate();
+
+        if (options.getImageRes() != 0) {
+            stImage.setVisibility(VISIBLE);
+            stImage.setImageResource(options.getImageRes());
+        }
+
+        if (!TextUtils.isEmpty(options.getMessage())) {
+            stMessage.setVisibility(VISIBLE);
+            stMessage.setText(options.getMessage());
+        }
+
+        if (options.getButtonAction() != null) {
+            stButton.setVisibility(VISIBLE);
+            stImage.setImageResource(options.getImageRes());
+            if (!TextUtils.isEmpty(options.getButtonText())) {
+                stButton.setText(options.getButtonText());
+            }
         }
     }
 

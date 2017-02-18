@@ -56,6 +56,13 @@
             android:text="locationOff"
             />
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="custom"
+            android:text="custom"
+            />
+
     </com.google.android.flexbox.FlexboxLayout>
 
     <com.gturedi.views.StatefulLayout

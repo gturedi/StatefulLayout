@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
+import com.gturedi.views.CustomStateOptions;
 import com.gturedi.views.StatefulLayout;
 
 /**
@@ -51,6 +52,14 @@ public class MainActivity
 
     public void locationOff(View view) {
         stateful.showLocationOff(runnable);
+    }
+
+    public void custom(View view) {
+        //stateful.showCustom(new CustomStateOptions().image(R.drawable.ic_bluetooth_disabled_black_24dp));
+        //stateful.showCustom(new CustomStateOptions().image(R.drawable.ic_bluetooth_disabled_black_24dp).message("please open bluetooth"));
+        //stateful.showCustom(new CustomStateOptions().message("hey yow!"));
+        //stateful.showCustom(new CustomStateOptions().message("hey yow!").buttonAction(runnable));
+        stateful.showCustom(new CustomStateOptions().image(R.drawable.ic_bluetooth_disabled_black_24dp).message("please open bluetooth").buttonText("settings").buttonAction(runnable));
     }
 
 }
