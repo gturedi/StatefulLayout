@@ -43,4 +43,13 @@ public class MainActivity
         });
     }
 
+    public void offline(View view) {
+        stateful.showOffline(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(MainActivity.this, "click!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 }

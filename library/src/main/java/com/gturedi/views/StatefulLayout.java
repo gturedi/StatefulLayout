@@ -50,8 +50,7 @@ public class StatefulLayout
         super.onFinishInflate();
         if (getChildCount() != 1) throw new IllegalStateException("StatefulLayout must have one child!");
         setOrientation(VERTICAL);
-        if (isInEditMode()) return;
-        //setGravity(Gravity.CENTER);
+        if (isInEditMode()) return; // to initSate state views in designer
         content = getChildAt(0);
         LayoutInflater.from(getContext()).inflate(R.layout.stateful_layout, this, true);
         stContainer = (LinearLayout) findViewById(R.id.stContainer);
@@ -75,7 +74,7 @@ public class StatefulLayout
     }
 
     public void showLoading(String message) {
-        hide();
+        initSate();
         stProgress.setVisibility(VISIBLE);
         if (!TextUtils.isEmpty(message)) {
             stMessage.setVisibility(VISIBLE);
@@ -92,7 +91,7 @@ public class StatefulLayout
     }
 
     public void showEmpty(String message) {
-        hide();
+        initSate();
         stImage.setVisibility(VISIBLE);
         stImage.setImageResource(R.drawable.st_ic_empty);
         stMessage.setVisibility(VISIBLE);
@@ -112,7 +111,7 @@ public class StatefulLayout
     }
 
     public void showError(String message, final Runnable runnable) {
-        hide();
+        initSate();
         stImage.setVisibility(VISIBLE);
         stImage.setImageResource(R.drawable.sl_ic_error);
         stMessage.setVisibility(VISIBLE);
@@ -134,7 +133,38 @@ public class StatefulLayout
         }
     }
 
-    private void hide() {
+    public void showOffline(Runnable runnable) {
+        showOffline("", runnable);
+    }
+
+    public void showOffline(@StringRes int resId, Runnable runnable) {
+        showOffline(str(resId), runnable);
+    }
+
+    public void showOffline(String message, final Runnable runnable) {
+        initSate();
+        stImage.setVisibility(VISIBLE);
+        stImage.setImageResource(R.drawable.sl_ic_offline);
+        stMessage.setVisibility(VISIBLE);
+        if (TextUtils.isEmpty(message)) {
+            stMessage.setText(R.string.slOfflineMessage);
+        } else {
+            stMessage.setText(message);
+        }
+        if (runnable == null) {
+            stButton.setVisibility(GONE);
+        } else {
+            stButton.setVisibility(VISIBLE);
+            stButton.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    runnable.run();
+                }
+            });
+        }
+    }
+
+    private void initSate() {
         content.setVisibility(GONE);
         stContainer.setVisibility(VISIBLE);
         stProgress.setVisibility(GONE);
