@@ -83,112 +83,57 @@ public class StatefulLayout
     }
 
     public void showEmpty() {
-        showEmpty("");
+        showStateByType(ErrorStateType.EMPTY, "", null);
     }
 
     public void showEmpty(@StringRes int resId) {
-        showEmpty(str(resId));
+        showStateByType(ErrorStateType.EMPTY, "", null);
     }
 
-    public void showEmpty(String message) {
+    public void showError(Runnable clickAction) {
+        showStateByType(ErrorStateType.ERROR, "", clickAction);
+    }
+
+    public void showError(@StringRes int resId, Runnable clickAction) {
+        showStateByType(ErrorStateType.ERROR, str(resId), clickAction);
+    }
+
+    public void showOffline(Runnable clickAction) {
+        showStateByType(ErrorStateType.OFFLINE, "", clickAction);
+    }
+
+    public void showOffline(@StringRes int resId, Runnable clickAction) {
+        showStateByType(ErrorStateType.OFFLINE, str(resId), clickAction);
+    }
+
+    public void showLocationOff(Runnable clickAction) {
+        showStateByType(ErrorStateType.LOCATION_OFF, "", clickAction);
+    }
+
+    public void showLocationOff(@StringRes int resId, Runnable clickAction) {
+        showStateByType(ErrorStateType.LOCATION_OFF, str(resId), clickAction);
+    }
+
+    private void showStateByType(ErrorStateType type, String message, final Runnable clickAction) {
         initSate();
         stImage.setVisibility(VISIBLE);
-        stImage.setImageResource(R.drawable.st_ic_empty);
+        stImage.setImageResource(type.imageRes);
+
         stMessage.setVisibility(VISIBLE);
         if (TextUtils.isEmpty(message)) {
-            stMessage.setText(R.string.slEmptyMessage);
+            stMessage.setText(type.messageRes);
         } else {
             stMessage.setText(message);
         }
-    }
 
-    public void showError(Runnable runnable) {
-        showError("", runnable);
-    }
-
-    public void showError(@StringRes int resId, Runnable runnable) {
-        showError(str(resId), runnable);
-    }
-
-    public void showError(String message, final Runnable runnable) {
-        initSate();
-        stImage.setVisibility(VISIBLE);
-        stImage.setImageResource(R.drawable.sl_ic_error);
-        stMessage.setVisibility(VISIBLE);
-        if (TextUtils.isEmpty(message)) {
-            stMessage.setText(R.string.slErrorMessage);
-        } else {
-            stMessage.setText(message);
-        }
-        if (runnable == null) {
+        if (clickAction == null) {
             stButton.setVisibility(GONE);
         } else {
             stButton.setVisibility(VISIBLE);
             stButton.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    runnable.run();
-                }
-            });
-        }
-    }
-
-    public void showOffline(Runnable runnable) {
-        showOffline("", runnable);
-    }
-
-    public void showOffline(@StringRes int resId, Runnable runnable) {
-        showOffline(str(resId), runnable);
-    }
-
-    public void showOffline(String message, final Runnable runnable) {
-        initSate();
-        stImage.setVisibility(VISIBLE);
-        stImage.setImageResource(R.drawable.sl_ic_offline);
-        stMessage.setVisibility(VISIBLE);
-        if (TextUtils.isEmpty(message)) {
-            stMessage.setText(R.string.slOfflineMessage);
-        } else {
-            stMessage.setText(message);
-        }
-        if (runnable == null) {
-            stButton.setVisibility(GONE);
-        } else {
-            stButton.setVisibility(VISIBLE);
-            stButton.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    runnable.run();
-                }
-            });
-        }
-    }
-    public void showLocationOff(Runnable runnable) {
-        showLocationOff("", runnable);
-    }
-
-    public void showLocationOff(@StringRes int resId, Runnable runnable) {
-        showLocationOff(str(resId), runnable);
-    }
-
-    public void showLocationOff(String message, final Runnable runnable) {
-        initSate();
-        stImage.setVisibility(VISIBLE);
-        stImage.setImageResource(R.drawable.ic_location_off);
-        stMessage.setVisibility(VISIBLE);
-        if (TextUtils.isEmpty(message)) {
-            stMessage.setText(R.string.slLocationOffMessage);
-        } else {
-            stMessage.setText(message);
-        }
-        if (runnable == null) {
-            stButton.setVisibility(GONE);
-        } else {
-            stButton.setVisibility(VISIBLE);
-            stButton.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    runnable.run();
+                    clickAction.run();
                 }
             });
         }

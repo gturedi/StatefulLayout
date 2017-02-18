@@ -15,6 +15,13 @@ public class MainActivity
 
     private StatefulLayout stateful;
 
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            Toast.makeText(MainActivity.this, "click!", Toast.LENGTH_SHORT).show();
+        }
+    };
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,30 +42,15 @@ public class MainActivity
     }
 
     public void error(View view) {
-        stateful.showError(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(MainActivity.this, "click!", Toast.LENGTH_SHORT).show();
-            }
-        });
+        stateful.showError(runnable);
     }
 
     public void offline(View view) {
-        stateful.showOffline(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(MainActivity.this, "click!", Toast.LENGTH_SHORT).show();
-            }
-        });
+        stateful.showOffline(runnable);
     }
 
     public void locationOff(View view) {
-        stateful.showLocationOff(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(MainActivity.this, "click!", Toast.LENGTH_SHORT).show();
-            }
-        });
+        stateful.showLocationOff(runnable);
     }
 
 }
