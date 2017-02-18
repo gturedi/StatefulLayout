@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">app</string>
+    <string name="testMessage">This just a simple test</string>
 </resources>
