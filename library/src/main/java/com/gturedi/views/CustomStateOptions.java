@@ -1,6 +1,7 @@
 package com.gturedi.views;
 
 import android.support.annotation.DrawableRes;
+import android.view.View;
 
 import java.io.Serializable;
 
@@ -12,7 +13,7 @@ public class CustomStateOptions implements Serializable {
     @DrawableRes private int imageRes;
     private String message;
     private String buttonText;
-    private Runnable buttonAction;
+    private View.OnClickListener buttonClickListener;
 
     public CustomStateOptions image(@DrawableRes int val) {
         imageRes = val;
@@ -29,8 +30,8 @@ public class CustomStateOptions implements Serializable {
         return this;
     }
 
-    public CustomStateOptions buttonAction(Runnable val) {
-        buttonAction = val;
+    public CustomStateOptions buttonClickListener(View.OnClickListener val) {
+        buttonClickListener = val;
         return this;
     }
 
@@ -46,8 +47,8 @@ public class CustomStateOptions implements Serializable {
         return buttonText;
     }
 
-    public Runnable getButtonAction() {
-        return buttonAction;
+    public View.OnClickListener getClickListener() {
+        return buttonClickListener;
     }
 
 }

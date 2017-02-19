@@ -30,21 +30,14 @@ public class StatefulLayout
 
     public StatefulLayout(Context context) {
         super(context);
-        init();
     }
 
     public StatefulLayout(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        init();
     }
 
     public StatefulLayout(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init();
-    }
-
-    private void init() {
-        //setOrientation(VERTICAL);
     }
 
     @Override
@@ -102,44 +95,44 @@ public class StatefulLayout
 
     // error //
 
-    public void showError(Runnable clickAction) {
-        showError("", clickAction);
+    public void showError(OnClickListener clickListener) {
+        showError("", clickListener);
     }
 
-    public void showError(@StringRes int resId, Runnable clickAction) {
-        showError(str(resId), clickAction);
+    public void showError(@StringRes int resId, OnClickListener clickListener) {
+        showError(str(resId), clickListener);
     }
 
-    public void showError(String message, Runnable clickAction) {
-        showStateByType(ErrorStateType.ERROR, message, clickAction);
+    public void showError(String message, OnClickListener clickListener) {
+        showStateByType(ErrorStateType.ERROR, message, clickListener);
     }
 
     // offline
 
-    public void showOffline(Runnable clickAction) {
-        showOffline("", clickAction);
+    public void showOffline(OnClickListener clickListener) {
+        showOffline("", clickListener);
     }
 
-    public void showOffline(@StringRes int resId, Runnable clickAction) {
-        showOffline(str(resId), clickAction);
+    public void showOffline(@StringRes int resId, OnClickListener clickListener) {
+        showOffline(str(resId), clickListener);
     }
 
-    public void showOffline(String message, Runnable clickAction) {
-        showStateByType(ErrorStateType.OFFLINE, message, clickAction);
+    public void showOffline(String message, OnClickListener clickListener) {
+        showStateByType(ErrorStateType.OFFLINE, message, clickListener);
     }
 
     // location off //
 
-    public void showLocationOff(Runnable clickAction) {
-        showLocationOff("", clickAction);
+    public void showLocationOff(OnClickListener clickListener) {
+        showLocationOff("", clickListener);
     }
 
-    public void showLocationOff(@StringRes int resId, Runnable clickAction) {
-        showLocationOff(str(resId), clickAction);
+    public void showLocationOff(@StringRes int resId, OnClickListener clickListener) {
+        showLocationOff(str(resId), clickListener);
     }
 
-    public void showLocationOff(String message, Runnable clickAction) {
-        showStateByType(ErrorStateType.LOCATION_OFF, message, clickAction);
+    public void showLocationOff(String message, OnClickListener clickListener) {
+        showStateByType(ErrorStateType.LOCATION_OFF, message, clickListener);
     }
 
     // custom //
@@ -157,9 +150,9 @@ public class StatefulLayout
             stMessage.setText(options.getMessage());
         }
 
-        if (options.getButtonAction() != null) {
+        if (options.getButtonText() != null) {
             stButton.setVisibility(VISIBLE);
-            stImage.setImageResource(options.getImageRes());
+            stButton.setOnClickListener(options.getClickListener());
             if (!TextUtils.isEmpty(options.getButtonText())) {
                 stButton.setText(options.getButtonText());
             }
@@ -168,7 +161,7 @@ public class StatefulLayout
 
     // helper methods //
 
-    private void showStateByType(ErrorStateType type, String message, final Runnable clickAction) {
+    private void showStateByType(ErrorStateType type, String message, OnClickListener clickListener) {
         initSate();
         stImage.setVisibility(VISIBLE);
         stImage.setImageResource(type.imageRes);
@@ -180,16 +173,11 @@ public class StatefulLayout
             stMessage.setText(message);
         }
 
-        if (clickAction == null) {
+        if (clickListener == null) {
             stButton.setVisibility(GONE);
         } else {
             stButton.setVisibility(VISIBLE);
-            stButton.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    clickAction.run();
-                }
-            });
+            stButton.setOnClickListener(clickListener);
         }
     }
 

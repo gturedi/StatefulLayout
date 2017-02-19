@@ -3,8 +3,7 @@ apply plugin: 'com.android.library'
 android {
     compileSdkVersion project.compileSdkVersion
     buildToolsVersion project.buildToolsVersion
-    resourcePrefix 'stf_'
-    publishNonDefault true
+    resourcePrefix 'stf'
 
     defaultConfig {
         minSdkVersion project.minSdkVersion

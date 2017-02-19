@@ -16,9 +16,9 @@ public class MainActivity
 
     private StatefulLayout stateful;
 
-    private Runnable runnable = new Runnable() {
+    private View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
-        public void run() {
+        public void onClick(View v) {
             Toast.makeText(MainActivity.this, "click!", Toast.LENGTH_SHORT).show();
         }
     };
@@ -47,21 +47,21 @@ public class MainActivity
     }
 
     public void error(View view) {
-        //stateful.showError(runnable);
-        //stateful.showError(R.string.testMessage, runnable);
-        stateful.showError(getString(R.string.testMessage), runnable);
+        //stateful.showError(clickListener);
+        //stateful.showError(R.string.testMessage, clickListener);
+        stateful.showError(getString(R.string.testMessage), clickListener);
     }
 
     public void offline(View view) {
-        //stateful.showOffline(runnable);
-        //stateful.showOffline(R.string.testMessage, runnable);
-        stateful.showOffline(getString(R.string.testMessage), runnable);
+        //stateful.showOffline(clickListener);
+        //stateful.showOffline(R.string.testMessage, clickListener);
+        stateful.showOffline(getString(R.string.testMessage), clickListener);
     }
 
     public void locationOff(View view) {
-        //stateful.showLocationOff(runnable);
-        //stateful.showLocationOff(R.string.testMessage, runnable);
-        stateful.showLocationOff(getString(R.string.testMessage), runnable);
+        //stateful.showLocationOff(clickListener);
+        //stateful.showLocationOff(R.string.testMessage, clickListener);
+        stateful.showLocationOff(getString(R.string.testMessage), clickListener);
     }
 
     public void custom(View view) {
@@ -69,12 +69,12 @@ public class MainActivity
         //stateful.showCustom(new CustomStateOptions().image(R.drawable.ic_bluetooth_disabled_black_24dp));
         //stateful.showCustom(new CustomStateOptions().image(R.drawable.ic_bluetooth_disabled_black_24dp).message("please open bluetooth"));
         //stateful.showCustom(new CustomStateOptions().message("hey yow!"));
-        //stateful.showCustom(new CustomStateOptions().message("hey yow!").buttonAction(runnable));
+        //stateful.showCustom(new CustomStateOptions().message("hey yow!").buttonAction(clickListener));
         stateful.showCustom(new CustomStateOptions()
                 .image(R.drawable.ic_bluetooth_disabled_black_24dp)
                 .message("please open bluetooth")
                 .buttonText("settings")
-                .buttonAction(runnable));
+                .buttonClickListener(clickListener));
     }
 
 }

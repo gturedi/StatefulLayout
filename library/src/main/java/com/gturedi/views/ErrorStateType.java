@@ -9,7 +9,7 @@ import android.support.annotation.StringRes;
 public enum ErrorStateType {
 
     EMPTY(R.drawable.stf_ic_empty, R.string.stfEmptyMessage),
-    ERROR(R.drawable.stf_ic_error, R.string.srfErrorMessage),
+    ERROR(R.drawable.stf_ic_error, R.string.stfErrorMessage),
     OFFLINE(R.drawable.stf_ic_offline, R.string.stfOfflineMessage),
     LOCATION_OFF(R.drawable.stf_ic_location_off, R.string.stfLocationOffMessage);
 

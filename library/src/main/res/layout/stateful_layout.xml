@@ -23,7 +23,7 @@
 
         <TextView
             android:id="@+id/stMessage"
-            android:text="@string/srfErrorMessage"
+            android:text="@string/stfErrorMessage"
             style="@style/stfMessage"
             />
 
