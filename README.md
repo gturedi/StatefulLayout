@@ -53,6 +53,15 @@ Finally in your activity/fragment get StatefulLayout reference and call showXXX 
     }
 ```
 
+## Customization
+Just override relevant resource in your app to customize state views appearance
+
+To Override **strings** [strings.xml variables](library/src/main/res/values/strings.xml)
+
+To Override **styles** [styles.xml](library/src/main/res/values/styles.xml)
+
+To Override **layout** [stateful_layout.xml](library/src/main/res/layout/stateful_layout.xml)
+
 ## License
     Copyright 2017 Gökhan Türedi (turedi.gokhan@gmail.com)
     
