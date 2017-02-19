@@ -1,6 +1,7 @@
 # StatefulLayout
 Android layout to show most common state templates like loading, empty, error etc. To do that all you need to is wrap 
 the target area(view) with StatefulLayout.
+![alt text](sample.gif)
 
 ## Usage
 Add dependecy to gradle
@@ -12,7 +13,7 @@ repositories {
 }
 
 dependencies {
-     compile 'com.github.gokhan-turedi:StatefulLayout:1.0.0'
+     compile 'com.github.gturedi:StatefulLayout:master-SNAPSHOT'
 }
 ```
 
