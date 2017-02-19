@@ -57,15 +57,10 @@ Finally in your activity/fragment get StatefulLayout reference and call showXXX 
 State methods have overloads for customization. If you pass clickListener parameter as null, relevant state button 
 will be hided. More customization please look [CustomStateOptions.java](library/src/main/java/com/gturedi/views/CustomStateOptions.java)
 - `public void showContent()`
-- `public void showLoading()`
 - `public void showLoading(String message)`
-- `public void showEmpty()`
 - `public void showEmpty(String message)`
-- `public void showError(OnClickListener clickListener)`
 - `public void showError(String message, OnClickListener clickListener)`
-- `public void showOffline(OnClickListener clickListener)`
 - `public void showOffline(String message, OnClickListener clickListener)`
-- `public void showLocationOff(OnClickListener clickListener)`
 - `public void showLocationOff(String message, OnClickListener clickListener)`
 - `public void showCustom(CustomStateOptions options)`
 
