@@ -1,8 +1,8 @@
 <resources>
-    <string name="slErrorMessage">An error occurred please try again later</string>
-    <string name="slOfflineMessage">Please check your connection</string>
-    <string name="slLocationOffMessage">Please enable location services</string>
-    <string name="slEmptyMessage">There are no items</string>
-    <string name="slLoadingMessage">Loading..</string>
-    <string name="slRetry">Retry</string>
+    <string name="srfErrorMessage">An error occurred please try again later</string>
+    <string name="stfOfflineMessage">Please check your connection</string>
+    <string name="stfLocationOffMessage">Please enable location services</string>
+    <string name="stfEmptyMessage">There are no items</string>
+    <string name="stfLoadingMessage">Loading..</string>
+    <string name="stfButtonText">Retry</string>
 </resources>

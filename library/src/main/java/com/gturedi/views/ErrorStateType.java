@@ -8,10 +8,10 @@ import android.support.annotation.StringRes;
  */
 public enum ErrorStateType {
 
-    EMPTY(R.drawable.st_ic_empty, R.string.slEmptyMessage),
-    ERROR(R.drawable.sl_ic_error, R.string.slErrorMessage),
-    OFFLINE(R.drawable.sl_ic_offline, R.string.slOfflineMessage),
-    LOCATION_OFF(R.drawable.ic_location_off, R.string.slLocationOffMessage);
+    EMPTY(R.drawable.stf_ic_empty, R.string.stfEmptyMessage),
+    ERROR(R.drawable.stf_ic_error, R.string.srfErrorMessage),
+    OFFLINE(R.drawable.stf_ic_offline, R.string.stfOfflineMessage),
+    LOCATION_OFF(R.drawable.stf_ic_location_off, R.string.stfLocationOffMessage);
 
     @DrawableRes
     public final int imageRes;

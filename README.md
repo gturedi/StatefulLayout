@@ -1,6 +1,7 @@
 # StatefulLayout
 Android layout to show most common state templates like loading, empty, error etc. To do that all you need to is wrap 
 the target area(view) with StatefulLayout.
+
 ![alt text](sample.gif)
 
 ## Usage
@@ -24,7 +25,8 @@ Then wrap a view which target area(view) to show states with StatefulLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
-
+    
+        <!-- your content here  -->
         <LinearLayout
             android:id="@+id/target"
             android:layout_width="wrap_content"

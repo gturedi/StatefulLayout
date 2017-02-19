@@ -1,28 +1,36 @@
 <resources>
 
-    <style name="stProgress">
+    <style name="stfContainer">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <style name="stfProgress">
         <item name="android:layout_width">60dp</item>
         <item name="android:layout_height">60dp</item>
-        <item name="android:layout_marginBottom">10dp</item>
     </style>
 
-    <style name="stImage">
+    <style name="stfImage">
         <item name="android:layout_width">75dp</item>
         <item name="android:layout_height">75dp</item>
-        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:tint">@color/stfImageColor</item>
     </style>
 
-    <style name="stMessage">
+    <style name="stfMessage">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginLeft">20dp</item>
         <item name="android:layout_marginRight">20dp</item>
-        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:layout_marginTop">10dp</item>
     </style>
 
-    <style name="stButton">
+    <style name="stfButton">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">10dp</item>
     </style>
 
 </resources>

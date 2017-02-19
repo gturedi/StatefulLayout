@@ -6,35 +6,31 @@
 
     <LinearLayout
         android:id="@+id/stContainer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:visibility="gone"
         tools:visibility="visible"
+        style="@style/stfContainer"
         >
 
         <ProgressBar
             android:id="@+id/stProgress"
-            style="@style/stProgress"
+            style="@style/stfProgress"
             />
 
         <ImageView
             android:id="@+id/stImage"
-            app:srcCompat="@drawable/sl_ic_error"
-            style="@style/stImage"
+            app:srcCompat="@drawable/stf_ic_error"
+            style="@style/stfImage"
             />
 
         <TextView
             android:id="@+id/stMessage"
-            android:text="@string/slErrorMessage"
-            style="@style/stMessage"
+            android:text="@string/srfErrorMessage"
+            style="@style/stfMessage"
             />
 
         <Button
             android:id="@+id/stButton"
-            android:text="@string/slRetry"
-            style="@style/stButton"
+            android:text="@string/stfButtonText"
+            style="@style/stfButton"
             />
 
     </LinearLayout>
