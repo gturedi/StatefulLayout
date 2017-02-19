@@ -14,7 +14,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 /**
- * Created by gturedi on 17.02.2017.
+ * Android layout to show most common state templates like loading, empty, error etc. To do that all you need to is
+ * wrap the target area(view) with StatefulLayout. For more information about usage look
+ * <a href="https://github.com/gturedi/StatefulLayout#usage">here</a>
  */
 public class StatefulLayout
         extends LinearLayout {
@@ -54,6 +56,8 @@ public class StatefulLayout
         stMessage = (TextView) findViewById(R.id.stMessage);
         stButton = (Button) findViewById(R.id.stButton);
     }
+
+    // content //
 
     public void showContent() {
         content.setVisibility(VISIBLE);
@@ -137,6 +141,11 @@ public class StatefulLayout
 
     // custom //
 
+    /**
+     * Shows custom state for given options. If you do not set buttonClickListener, the button will not be shown
+     * @param options customization options
+     * @see com.gturedi.views.CustomStateOptions
+     */
     public void showCustom(CustomStateOptions options) {
         initSate();
 

@@ -6,7 +6,8 @@ import android.view.View;
 import java.io.Serializable;
 
 /**
- * Created by gturedi on 18.02.2017.
+ * Model builder class to show custom state
+ * @see com.gturedi.views.StatefulLayout#showCustom(CustomStateOptions)
  */
 public class CustomStateOptions implements Serializable {
 
