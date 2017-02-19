@@ -16,7 +16,7 @@ dependencies {
 }
 ```
 
-Then wrap a view which target area to show states with StatefulLayout
+Then wrap a view which target area(view) to show states with StatefulLayout
 ```xml
   <com.gturedi.views.StatefulLayout
         android:id="@+id/stateful"
@@ -34,6 +34,22 @@ Then wrap a view which target area to show states with StatefulLayout
 
     </com.gturedi.views.StatefulLayout>
 ```
+
+Finally in your activity/fragment get StatefulLayout reference and call showXXX methods
+```java
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        
+        StatefulLayout stateful = (StatefulLayout) findViewById(R.id.stateful);
+        stateful.showLoading();
+        //stateful.showEmpty(getString(R.string.testMessage));
+        //stateful.showError(getString(R.string.testMessage), runnable);
+        //etc.
+    }
+```
+
 ## License
     Copyright 2017 Gökhan Türedi (turedi.gokhan@gmail.com)
     
