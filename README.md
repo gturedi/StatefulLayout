@@ -1,4 +1,4 @@
-# StatefulLayout
+## StatefulLayout
 Android layout to show most common state templates like loading, empty, error etc. To do that all you need to is wrap 
 the target area(view) with StatefulLayout.
 
@@ -48,19 +48,35 @@ Finally in your activity/fragment get StatefulLayout reference and call showXXX 
         StatefulLayout stateful = (StatefulLayout) findViewById(R.id.stateful);
         stateful.showLoading();
         //stateful.showEmpty(getString(R.string.testMessage));
-        //stateful.showError(getString(R.string.testMessage), runnable);
+        //stateful.showError(getString(R.string.testMessage), clickListener);
         //etc.
     }
 ```
 
+## API
+State methods have overloads for customization. If you pass clickListener parameter as null, relevant state button 
+will be hided. More customization please look [CustomStateOptions.java](llibrary/src/main/java/com/gturedi/views/CustomStateOptions.java)
+- `public void showContent()`
+- `public void showLoading()`
+- `public void showLoading(String message)`
+- `public void showEmpty()`
+- `public void showEmpty(String message)`
+- `public void showError(OnClickListener clickListener)`
+- `public void showError(String message, OnClickListener clickListener)`
+- `public void showOffline(OnClickListener clickListener)`
+- `public void showOffline(String message, OnClickListener clickListener)`
+- `public void showLocationOff(OnClickListener clickListener)`
+- `public void showLocationOff(String message, OnClickListener clickListener)`
+- `public void showCustom(CustomStateOptions options)`
+
 ## Customization
 Just override relevant resource in your app to customize state views appearance
 
-To Override **strings** [strings.xml variables](library/src/main/res/values/strings.xml)
+- To Override **strings** [strings.xml variables](library/src/main/res/values/strings.xml)
 
-To Override **styles** [styles.xml](library/src/main/res/values/styles.xml)
+- To Override **styles** [styles.xml](library/src/main/res/values/styles.xml)
 
-To Override **layout** [stateful_layout.xml](library/src/main/res/layout/stateful_layout.xml)
+- To Override **layout** [stateful_layout.xml](library/src/main/res/layout/stateful_layout.xml)
 
 ## License
     Copyright 2017 Gökhan Türedi (turedi.gokhan@gmail.com)
