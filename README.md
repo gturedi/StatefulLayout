@@ -1,3 +1,6 @@
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-StatefulLayout-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/5325)  [![API](https://img.shields.io/badge/API-14%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=14)  [![Jitpack](https://jitpack.io/v/gturedi/StatefulLayout.svg?style=flat)](https://jitpack.io/#gturedi/StatefulLayout)
+
+
 ## StatefulLayout
 Android layout to show most common state templates like loading, empty, error etc. To do that all you need to is wrap 
 the target area(view) with StatefulLayout.
@@ -40,17 +43,11 @@ Then wrap a view which target area(view) to show states with StatefulLayout
 
 Finally in your activity/fragment get StatefulLayout reference and call showXXX methods
 ```java
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        
-        StatefulLayout stateful = (StatefulLayout) findViewById(R.id.stateful);
-        stateful.showLoading();
-        //stateful.showEmpty(getString(R.string.testMessage));
-        //stateful.showError(getString(R.string.testMessage), clickListener);
-        //etc.
-    }
+StatefulLayout stateful = (StatefulLayout) findViewById(R.id.stateful);
+stateful.showLoading();
+//stateful.showEmpty(getString(R.string.testMessage));
+//stateful.showError(getString(R.string.testMessage), clickListener);
+//etc.
 ```
 
 ## API
