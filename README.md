@@ -1,10 +1,6 @@
 ## StatefulLayout
 
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-StatefulLayout-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/5325)  
-[![API](https://img.shields.io/badge/API-14%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=14)  
-[![Jitpack](https://jitpack.io/v/gturedi/StatefulLayout.svg?style=flat)](https://jitpack.io/#gturedi/StatefulLayout)  
-[![Build Status](https://travis-ci.org/gturedi/StatefulLayout.svg?branch=master)](https://travis-ci.org/gturedi/StatefulLayout)  
-[![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-StatefulLayout-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/5325)  [![API](https://img.shields.io/badge/API-14%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=14)  [![Jitpack](https://jitpack.io/v/gturedi/StatefulLayout.svg?style=flat)](https://jitpack.io/#gturedi/StatefulLayout)  [![Build Status](https://travis-ci.org/gturedi/StatefulLayout.svg?branch=master)](https://travis-ci.org/gturedi/StatefulLayout)  [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
 Android layout to show most common state templates like loading, empty, error etc. To do that all you need to is wrap 
 the target area(view) with StatefulLayout.
@@ -57,7 +53,6 @@ stateful.showLoading();
 ## API
 State methods have overloads for customization. If you pass clickListener parameter as null, relevant state button 
 will be hided. More customization please look [CustomStateOptions.java](library/src/main/java/com/gturedi/views/CustomStateOptions.java)
-```java
 - showContent()
 - showLoading(String message)
 - showEmpty(String message)
@@ -65,7 +60,6 @@ will be hided. More customization please look [CustomStateOptions.java](library/
 - showOffline(String message, OnClickListener clickListener)
 - showLocationOff(String message, OnClickListener clickListener)
 - showCustom(CustomStateOptions options)
-```
 
 ## Customization
 Just override relevant resource in your app to customize state views appearance

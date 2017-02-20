@@ -17,6 +17,9 @@ jdk:
 notifications:
   email: true
 
+before_install:
+ - chmod +x gradlew
+
 script:
 - ./gradlew assemble
 
