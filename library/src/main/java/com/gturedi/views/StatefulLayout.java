@@ -7,6 +7,8 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -29,6 +31,8 @@ public class StatefulLayout
     private View content;
     private TextView stMessage;
     private Button stButton;
+    private Animation in;
+    private Animation out;
 
     public StatefulLayout(Context context) {
         super(context);
@@ -55,13 +59,30 @@ public class StatefulLayout
         stImage = (ImageView) findViewById(R.id.stImage);
         stMessage = (TextView) findViewById(R.id.stMessage);
         stButton = (Button) findViewById(R.id.stButton);
+
+        in = AnimationUtils.loadAnimation(getContext(), android.R.anim.fade_in);
+        //in.setDuration(1000);
+        //in.setFillAfter(true);
+        out = AnimationUtils.loadAnimation(getContext(), android.R.anim.fade_out);
+        //out.setDuration(1000);
+        //out.setFillAfter(true);
     }
 
     // content //
 
     public void showContent() {
-        content.setVisibility(VISIBLE);
-        stContainer.setVisibility(GONE);
+        if (stContainer.getVisibility() == VISIBLE) {
+            out.setAnimationListener(new CustomAnimationListener(){
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    stContainer.setVisibility(GONE);
+                    content.setVisibility(VISIBLE);
+                    in.setAnimationListener(null);
+                    content.startAnimation(in);
+                }
+            });
+            stContainer.startAnimation(out);
+        }
     }
 
     // loading //
@@ -191,12 +212,26 @@ public class StatefulLayout
     }
 
     private void initSate() {
-        content.setVisibility(GONE);
-        stContainer.setVisibility(VISIBLE);
         stProgress.setVisibility(GONE);
         stImage.setVisibility(GONE);
         stMessage.setVisibility(GONE);
         stButton.setVisibility(GONE);
+
+        content.clearAnimation();
+        stContainer.clearAnimation();
+
+        if (stContainer.getVisibility() != VISIBLE) {
+            out.setAnimationListener(new CustomAnimationListener(){
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    content.setVisibility(GONE);
+                    stContainer.setVisibility(VISIBLE);
+                    in.setAnimationListener(null);
+                    stContainer.startAnimation(in);
+                }
+            });
+            content.startAnimation(out);
+        }
     }
 
     private String str(@StringRes int resId) {
