@@ -1,0 +1,7 @@
+<resources>
+    <declare-styleable name="stfStatefulLayout">
+        <attr name="stfAnimationEnabled" format="boolean" />
+        <attr name="stfInAnimation" format="reference" />
+        <attr name="stfOutAnimation" format="reference" />
+    </declare-styleable>
+</resources>

@@ -1,6 +1,8 @@
 package com.gturedi.views;
 
 import android.content.Context;
+import android.content.res.TypedArray;
+import android.support.annotation.AnimRes;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.text.TextUtils;
@@ -24,6 +26,9 @@ public class StatefulLayout
         extends LinearLayout {
 
     private static final String MSG_ONE_CHILD = "StatefulLayout must have one child!";
+    private static final boolean DEFAULT_ANIM_ENABLED = true;
+    private static final int DEFAULT_IN_ANIM = android.R.anim.fade_in;
+    private static final int DEFAULT_OUT_ANIM = android.R.anim.fade_out;
 
     private LinearLayout stContainer;
     private ProgressBar stProgress;
@@ -31,19 +36,49 @@ public class StatefulLayout
     private View content;
     private TextView stMessage;
     private Button stButton;
-    private Animation in;
-    private Animation out;
+    private boolean animationEnabled;
+    @AnimRes
+    private int inAnimation;
+    @AnimRes
+    private int outAnimation;
 
     public StatefulLayout(Context context) {
-        super(context);
+        this(context, null);
     }
 
     public StatefulLayout(Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
+        super(context, attrs, 0);
+        TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.stfStatefulLayout, 0, 0);
+        animationEnabled = a.getBoolean(R.styleable.stfStatefulLayout_stfAnimationEnabled, DEFAULT_ANIM_ENABLED);
+        inAnimation = a.getResourceId(R.styleable.stfStatefulLayout_stfInAnimation, DEFAULT_IN_ANIM);
+        outAnimation = a.getResourceId(R.styleable.stfStatefulLayout_stfOutAnimation, DEFAULT_OUT_ANIM);
+        a.recycle();
     }
 
-    public StatefulLayout(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
+    public boolean isAnimationEnabled() {
+        return animationEnabled;
+    }
+
+    public void setAnimationEnabled(boolean animationEnabled) {
+        this.animationEnabled = animationEnabled;
+    }
+
+    @AnimRes
+    public int getInAnimation() {
+        return inAnimation;
+    }
+
+    public void setInAnimation(@AnimRes int inAnimation) {
+        this.inAnimation = inAnimation;
+    }
+
+    @AnimRes
+    public int getOutAnimation() {
+        return outAnimation;
+    }
+
+    public void setOutAnimation(@AnimRes int outAnimation) {
+        this.outAnimation = outAnimation;
     }
 
     @Override
@@ -51,7 +86,7 @@ public class StatefulLayout
         super.onFinishInflate();
         if (getChildCount() != 1) throw new IllegalStateException(MSG_ONE_CHILD);
         setOrientation(VERTICAL);
-        if (isInEditMode()) return; // to initSate state views in designer
+        if (isInEditMode()) return; // to hide state views in designer
         content = getChildAt(0);
         LayoutInflater.from(getContext()).inflate(R.layout.stateful_layout, this, true);
         stContainer = (LinearLayout) findViewById(R.id.stContainer);
@@ -59,29 +94,27 @@ public class StatefulLayout
         stImage = (ImageView) findViewById(R.id.stImage);
         stMessage = (TextView) findViewById(R.id.stMessage);
         stButton = (Button) findViewById(R.id.stButton);
-
-        in = AnimationUtils.loadAnimation(getContext(), android.R.anim.fade_in);
-        //in.setDuration(1000);
-        //in.setFillAfter(true);
-        out = AnimationUtils.loadAnimation(getContext(), android.R.anim.fade_out);
-        //out.setDuration(1000);
-        //out.setFillAfter(true);
     }
 
     // content //
 
     public void showContent() {
-        if (stContainer.getVisibility() == VISIBLE) {
-            out.setAnimationListener(new CustomAnimationListener(){
-                @Override
-                public void onAnimationEnd(Animation animation) {
-                    stContainer.setVisibility(GONE);
-                    content.setVisibility(VISIBLE);
-                    in.setAnimationListener(null);
-                    content.startAnimation(in);
-                }
-            });
-            stContainer.startAnimation(out);
+        if (isAnimationEnabled()) {
+            if (stContainer.getVisibility() == VISIBLE) {
+                Animation outAnim = createOutAnimation();
+                outAnim.setAnimationListener(new CustomAnimationListener() {
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        stContainer.setVisibility(GONE);
+                        content.setVisibility(VISIBLE);
+                        content.startAnimation(createInAnimation());
+                    }
+                });
+                stContainer.startAnimation(outAnim);
+            }
+        } else {
+            stContainer.setVisibility(GONE);
+            content.setVisibility(VISIBLE);
         }
     }
 
@@ -164,6 +197,7 @@ public class StatefulLayout
 
     /**
      * Shows custom state for given options. If you do not set buttonClickListener, the button will not be shown
+     *
      * @param options customization options
      * @see com.gturedi.views.CustomStateOptions
      */
@@ -217,25 +251,35 @@ public class StatefulLayout
         stMessage.setVisibility(GONE);
         stButton.setVisibility(GONE);
 
-        content.clearAnimation();
-        stContainer.clearAnimation();
-
-        if (stContainer.getVisibility() != VISIBLE) {
-            out.setAnimationListener(new CustomAnimationListener(){
-                @Override
-                public void onAnimationEnd(Animation animation) {
-                    content.setVisibility(GONE);
-                    stContainer.setVisibility(VISIBLE);
-                    in.setAnimationListener(null);
-                    stContainer.startAnimation(in);
-                }
-            });
-            content.startAnimation(out);
+        if (isAnimationEnabled()) {
+            if (stContainer.getVisibility() != VISIBLE) {
+                Animation outAnim = createOutAnimation();
+                outAnim.setAnimationListener(new CustomAnimationListener() {
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        content.setVisibility(GONE);
+                        stContainer.setVisibility(VISIBLE);
+                        stContainer.startAnimation(createInAnimation());
+                    }
+                });
+                content.startAnimation(outAnim);
+            }
+        } else {
+            content.setVisibility(GONE);
+            stContainer.setVisibility(VISIBLE);
         }
     }
 
     private String str(@StringRes int resId) {
         return getContext().getString(resId);
+    }
+
+    private Animation createInAnimation() {
+        return AnimationUtils.loadAnimation(getContext(), inAnimation);
+    }
+
+    private Animation createOutAnimation() {
+        return AnimationUtils.loadAnimation(getContext(), outAnimation);
     }
 
 }
