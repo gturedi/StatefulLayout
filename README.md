@@ -27,6 +27,9 @@ Then wrap a view which target area(view) to show states with StatefulLayout
         android:id="@+id/stateful"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:stfAnimationEnabled="true"
+        app:stfInAnimation="@android:anim/slide_in_left"
+        app:stfOutAnimation="@android:anim/slide_out_right"
         >
     
         <!-- your content here  -->
@@ -34,9 +37,6 @@ Then wrap a view which target area(view) to show states with StatefulLayout
             android:id="@+id/target"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:stfAnimationEnabled="true"
-            app:stfInAnimation="@android:anim/slide_in_left"
-            app:stfOutAnimation="@android:anim/slide_out_right"
             >
             ...
         </LinearLayout>
