@@ -34,6 +34,9 @@ Then wrap a view which target area(view) to show states with StatefulLayout
             android:id="@+id/target"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:stfAnimationEnabled="true"
+            app:stfInAnimation="@android:anim/slide_in_left"
+            app:stfOutAnimation="@android:anim/slide_out_right"
             >
             ...
         </LinearLayout>
@@ -53,6 +56,10 @@ stateful.showLoading();
 ## API
 State methods have overloads for customization. If you pass clickListener parameter as null, relevant state button 
 will be hided. More customization please look [CustomStateOptions.java](library/src/main/java/com/gturedi/views/CustomStateOptions.java)
+
+- setAnimationEnabled(boolean animationEnabled)
+- setInAnimation(@AnimRes int inAnimation)
+- setOutAnimation(@AnimRes int outAnimation)
 - showContent()
 - showLoading(String message)
 - showEmpty(String message)
