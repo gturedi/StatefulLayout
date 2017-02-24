@@ -68,6 +68,13 @@ will be hided. More customization please look [CustomStateOptions.java](library/
 - showLocationOff(String message, OnClickListener clickListener)
 - showCustom(CustomStateOptions options)
 
+## Xml Attributes
+| Name | Type | Default | Description |
+|:----:|:----:|:-------:|:-----------:|
+| stfAnimationEnabled | boolean | true | Indicates whether to place the animation on state changes |
+| stfInAnimation | anim | @android:anim/fade_in | Animation started begin of state change |
+| stfOutAnimation | anim | @android:anim/fade_out | Animation started end of state change |
+
 ## Customization
 Just override relevant resource in your app to customize state views appearance
 
