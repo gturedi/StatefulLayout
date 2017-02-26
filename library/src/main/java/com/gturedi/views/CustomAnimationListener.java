@@ -3,23 +3,22 @@ package com.gturedi.views;
 import android.view.animation.Animation;
 
 /**
- * Created by gturedi on 21.02.2017.
+ * simple class to reduce callback hell
  */
-public class CustomAnimationListener implements Animation.AnimationListener {
+@SuppressWarnings("PMD.UncommentedEmptyMethodBody")
+public class CustomAnimationListener
+        implements Animation.AnimationListener {
 
     @Override
     public void onAnimationStart(Animation animation) {
-
     }
 
     @Override
     public void onAnimationEnd(Animation animation) {
-
     }
 
     @Override
     public void onAnimationRepeat(Animation animation) {
-
     }
 
 }

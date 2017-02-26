@@ -68,8 +68,8 @@ public class StatefulLayout
         return inAnimation;
     }
 
-    public void setInAnimation(@AnimRes int inAnimation) {
-        this.inAnimation = inAnimation;
+    public void setInAnimation(@AnimRes int anim) {
+        inAnimation = anim;
     }
 
     @AnimRes
@@ -77,8 +77,8 @@ public class StatefulLayout
         return outAnimation;
     }
 
-    public void setOutAnimation(@AnimRes int outAnimation) {
-        this.outAnimation = outAnimation;
+    public void setOutAnimation(@AnimRes int anim) {
+        outAnimation = anim;
     }
 
     @Override

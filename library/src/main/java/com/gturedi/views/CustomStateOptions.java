@@ -9,6 +9,7 @@ import java.io.Serializable;
  * Model builder class to show custom state
  * @see com.gturedi.views.StatefulLayout#showCustom(CustomStateOptions)
  */
+@SuppressWarnings("PMD.AvoidFieldNameMatchingMethodName")
 public class CustomStateOptions implements Serializable {
 
     @DrawableRes private int imageRes;
