@@ -1,9 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <ruleset name="Android Application Rules">
-    <description>Custom ruleset for Android application</description>
-    <exclude-pattern>.*/R.java</exclude-pattern>
-    <exclude-pattern>.*/gen/.*</exclude-pattern>
-
     <rule ref="rulesets/java/android.xml"/>
     <rule ref="rulesets/java/basic.xml"/>
     <rule ref="rulesets/java/braces.xml">
@@ -29,9 +24,7 @@
     <rule ref="rulesets/java/imports.xml"/>
     <rule ref="rulesets/java/logging-java.xml"/>
     <rule ref="rulesets/java/naming.xml">
-        <exclude name="ShortClassName" />
         <exclude name="ShortMethodName" />
-        <exclude name="ShortVariable" />
     </rule>
     <rule ref="rulesets/java/naming.xml/LongVariable">
         <properties>

@@ -4,7 +4,7 @@ apply plugin: 'pmd'
 
 def final CONFIG_DIR = "${project.rootDir}/gradle/quality"
 def final REPORT_DIR = "${project.buildDir}/reports"
-def final IGNORE_ERROR = true
+def final IGNORE_ERROR = false
 def final SOURCE = "src/main/java"
 def final INCLUDE_PATTERN = "**/*.java"
 def final EXCLUDE_PATTERN = "**/gen/**"
@@ -54,7 +54,7 @@ task findbugs(type: FindBugs) {
 
 task pmd(type: Pmd) {
     consoleOutput true
-    ruleSetFiles = files("$CONFIG_DIR/ruleSet.xml")
+    ruleSetFiles = files("$CONFIG_DIR/pmdRuleSet.xml")
     ignoreFailures = IGNORE_ERROR
     source SOURCE
     include INCLUDE_PATTERN
