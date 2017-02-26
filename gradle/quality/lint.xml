@@ -1,17 +1,8 @@
 <lint>
+    <issue id="all">
+        <ignore path="app" />
+    </issue>
     <issue id="MissingTranslation" severity="ignore"/>
-    <issue id="SetTextI18n" severity="ignore"/>
-    <issue id="IconMissingDensityFolder" severity="ignore" />
-    <issue id="UnusedResources" severity="ignore"/>
-    <issue id="GradleDependency" severity="ignore" />
-    <issue id="UnusedAttribute" severity="ignore" />
-    <issue id="SetJavaScriptEnabled" severity="ignore" />
-    <issue id="TextFields" severity="ignore" />
-    <issue id="ContentDescription" severity="ignore" />
-    <issue id="DefaultLocale" severity="ignore" />
-    <issue id="GoogleAppIndexingWarning" severity="ignore" />
-    <issue id="InvalidPackage" severity="ignore" />
-    <issue id="Overdraw" severity="ignore" />
-    <issue id="OldTargetApi" severity="ignore" />
-    <issue id="BinaryOperationInTimber" severity="ignore" />
+    <issue id="ContentDescription" severity="ignore"/>
+    <issue id="ResourceName" severity="ignore"/>
 </lint>

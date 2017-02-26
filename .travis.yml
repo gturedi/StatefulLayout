@@ -16,11 +16,10 @@ notifications:
 
 sudo: false
 
-before_install:
- - chmod +x gradlew
-
 script:
-- ./gradlew assembleDebug
+- chmod +x gradlew
+- ./gradlew :library:assembleDebug
+- ./gradlew :library:check
 
 cache:
   directories:

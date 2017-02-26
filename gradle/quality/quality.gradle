@@ -39,7 +39,7 @@ task findbugs(type: FindBugs) {
     effort = "max"
     reportLevel = "high"
     excludeFilter = new File("$CONFIG_DIR/findbugsExludeFilter.xml")
-    classes = files("${project.rootDir}/app/build/intermediates/classes/debug/com/gturedi")
+    classes = files("${project.buildDir}/intermediates/classes")
     ignoreFailures = IGNORE_ERROR
     source SOURCE
     include INCLUDE_PATTERN
