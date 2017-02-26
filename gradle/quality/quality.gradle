@@ -1,0 +1,72 @@
+apply plugin: 'checkstyle'
+apply plugin: 'findbugs'
+apply plugin: 'pmd'
+
+def configDir = "${project.rootDir}/gradle/quality"
+def reportDir = "${project.buildDir}/reports"
+def ignoreErrors = true
+
+android {
+    lintOptions {
+        abortOnError !ignoreErrors
+        xmlReport false
+        htmlReport true
+        absolutePaths false
+        lintConfig file("$configDir/lint.xml")
+        htmlOutput file("$reportDir/lintReport.html")
+    }
+}
+
+task checkstyle(type: Checkstyle) {
+    ignoreFailures ignoreErrors
+    showViolations true
+    configFile file("${configDir}/checkstyle.xml")
+    source 'src/main/java'
+    include '**/*.java'
+    classpath = files()
+    reports {
+        xml.enabled = false
+        html.enabled = true
+        html.destination "$reportDir/checkstyle.html"
+    }
+}
+
+task findbugs(type: FindBugs) {
+    ignoreFailures = ignoreErrors
+    effort = "max"
+    reportLevel = "high"
+    excludeFilter = new File("$configDir/findbugsExludeFilter.xml")
+    classes = files("${project.rootDir}/app/build/intermediates/classes/debug/com/gturedi")
+    classpath = files()
+    source 'src'
+    include '**/*.java'
+    reports {
+        xml.enabled = false
+        html.enabled = true
+        html.destination "$reportDir/findbugs.html"
+    }
+}
+
+task pmd(type: Pmd) {
+    ignoreFailures = ignoreErrors
+    //toolVersion = '5.5.3'
+    consoleOutput true
+    // http://stackoverflow.com/questions/20710704/gradles-pmd-plugin-what-are-acceptable-arguments
+    //ruleSets = ['java-basic', 'java-android']
+    ruleSetFiles = files("$configDir/ruleSet.xml")
+    source 'src/main/java'
+    include '**/*.java'
+    reports {
+        xml.enabled = false
+        html.enabled = true
+        html.destination "$reportDir/pmd.html"
+    }
+}
+
+// http://vincentbrison.com/2014/07/19/how-to-improve-quality-and-syntax-of-your-android-code
+// check.dependsOn 'checkstyle', 'pmd', 'findbugs'
+afterEvaluate {
+    if (project.tasks.findByName('check')) {
+        check.dependsOn 'lint', 'checkstyle', 'findbugs'
+    }
+}
