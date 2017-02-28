@@ -11,7 +11,7 @@ the target area(view) with StatefulLayout.
 Add dependecy to app/build.gradle
 ```groovy
 dependencies {
-     compile 'com.github.gturedi:StatefulLayout:1.1.0'
+     compile 'com.github.gturedi:stateful-layout:1.1.0'
 }
 ```
 
