@@ -6,8 +6,9 @@
 
     <LinearLayout
         android:id="@+id/stContainer"
-        tools:visibility="visible"
         style="@style/stfContainer"
+        android:visibility="gone"
+        tools:visibility="visible"
         >
 
         <ProgressBar

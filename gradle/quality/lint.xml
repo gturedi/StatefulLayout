@@ -2,7 +2,5 @@
     <issue id="all">
         <ignore path="app" />
     </issue>
-    <issue id="MissingTranslation" severity="ignore"/>
     <issue id="ContentDescription" severity="ignore"/>
-    <issue id="ResourceName" severity="ignore"/>
 </lint>

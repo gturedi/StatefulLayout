@@ -88,7 +88,7 @@ public class StatefulLayout
         setOrientation(VERTICAL);
         if (isInEditMode()) return; // to hide state views in designer
         content = getChildAt(0);
-        LayoutInflater.from(getContext()).inflate(R.layout.stateful_layout, this, true);
+        LayoutInflater.from(getContext()).inflate(R.layout.stf_template, this, true);
         stContainer = (LinearLayout) findViewById(R.id.stContainer);
         stProgress = (ProgressBar) findViewById(R.id.stProgress);
         stImage = (ImageView) findViewById(R.id.stImage);
