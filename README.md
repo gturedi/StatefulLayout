@@ -1,6 +1,6 @@
 ## StatefulLayout
 
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-StatefulLayout-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/5325)  [![API](https://img.shields.io/badge/API-14%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=14)  [![MavenCentral](https://maven-badges.herokuapp.com/maven-central/com.github.gturedi/stateful-layout/badge.svg?style=flat)](https://repo1.maven.org/maven2/com/github/gturedi/stateful-layout/)  [![Build Status](https://travis-ci.org/gturedi/StatefulLayout.svg?branch=master)](https://travis-ci.org/gturedi/StatefulLayout)  [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-StatefulLayout-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/5325)  [![API](https://img.shields.io/badge/API-14%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=14)  [![MavenCentral](https://maven-badges.herokuapp.com/maven-central/com.github.gturedi/stateful-layout/badge.svg?style=flat)](https://oss.sonatype.org/content/repositories/releases/com/github/gturedi/stateful-layout/)  [![Build Status](https://travis-ci.org/gturedi/StatefulLayout.svg?branch=master)](https://travis-ci.org/gturedi/StatefulLayout)  [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
 Android layout to show most common state templates like loading, empty, error etc. To do that all you need to is wrap 
 the target area(view) with StatefulLayout.
@@ -11,7 +11,7 @@ the target area(view) with StatefulLayout.
 Add dependecy to app/build.gradle
 ```groovy
 dependencies {
-     compile 'com.github.gturedi:stateful-layout:1.1.0'
+     compile 'com.github.gturedi:stateful-layout:1.2.0'
 }
 ```
 
@@ -76,7 +76,7 @@ Just override relevant resource in your app to customize state views appearance
 
 - To Override **styles** [styles.xml](library/src/main/res/values/styles.xml)
 
-- To Override **layout** [stateful_layout.xml](library/src/main/res/layout/stateful_layout.xml)
+- To Override **layout** [stateful_layout.xml](library/src/main/res/layout/stf_template.xml)
 
 ## License
     Copyright 2017 Gökhan Türedi (turedi.gokhan@gmail.com)
