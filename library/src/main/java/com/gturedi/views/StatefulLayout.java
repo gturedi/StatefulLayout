@@ -121,7 +121,7 @@ public class StatefulLayout
     // loading //
 
     public void showLoading() {
-        showLoading("");
+        showLoading(R.string.stfLoadingMessage);
     }
 
     public void showLoading(@StringRes int resId) {
@@ -140,7 +140,7 @@ public class StatefulLayout
     // empty //
 
     public void showEmpty() {
-        showEmpty("");
+        showEmpty(R.string.stfEmptyMessage);
     }
 
     public void showEmpty(@StringRes int resId) {
@@ -154,7 +154,7 @@ public class StatefulLayout
     // error //
 
     public void showError(OnClickListener clickListener) {
-        showError("", clickListener);
+        showError(R.string.stfErrorMessage, clickListener);
     }
 
     public void showError(@StringRes int resId, OnClickListener clickListener) {
@@ -168,7 +168,7 @@ public class StatefulLayout
     // offline
 
     public void showOffline(OnClickListener clickListener) {
-        showOffline("", clickListener);
+        showOffline(R.string.stfOfflineMessage, clickListener);
     }
 
     public void showOffline(@StringRes int resId, OnClickListener clickListener) {
@@ -182,7 +182,7 @@ public class StatefulLayout
     // location off //
 
     public void showLocationOff(OnClickListener clickListener) {
-        showLocationOff("", clickListener);
+        showLocationOff(R.string.stfLocationOffMessage, clickListener);
     }
 
     public void showLocationOff(@StringRes int resId, OnClickListener clickListener) {
@@ -214,7 +214,7 @@ public class StatefulLayout
             stMessage.setText(options.getMessage());
         }
 
-        if (options.getButtonText() != null) {
+        if (options.getClickListener() != null) {
             stButton.setVisibility(VISIBLE);
             stButton.setOnClickListener(options.getClickListener());
             if (!TextUtils.isEmpty(options.getButtonText())) {
