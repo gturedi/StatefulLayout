@@ -83,10 +83,10 @@ public class StatefulLayout
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        if (getChildCount() != 1) throw new IllegalStateException(MSG_ONE_CHILD);
+        if (getChildCount() > 1) throw new IllegalStateException(MSG_ONE_CHILD);
+        if (isInEditMode()) return; // hide state views in designer
         setOrientation(VERTICAL);
-        if (isInEditMode()) return; // to hide state views in designer
-        content = getChildAt(0);
+        content = getChildAt(0); // assume first child as content
         LayoutInflater.from(getContext()).inflate(R.layout.stf_template, this, true);
         stContainer = (LinearLayout) findViewById(R.id.stContainer);
         stProgress = (ProgressBar) findViewById(R.id.stProgress);
@@ -128,12 +128,9 @@ public class StatefulLayout
     }
 
     public void showLoading(String message) {
-        initSate();
-        stProgress.setVisibility(VISIBLE);
-        if (!TextUtils.isEmpty(message)) {
-            stMessage.setVisibility(VISIBLE);
-            stMessage.setText(message);
-        }
+        showCustom(new CustomStateOptions()
+                .message(message)
+                .loading());
     }
 
     // empty //
@@ -147,7 +144,9 @@ public class StatefulLayout
     }
 
     public void showEmpty(String message) {
-        showStateByType(ErrorStateType.EMPTY, message, null);
+        showCustom(new CustomStateOptions()
+                .message(message)
+                .image(R.drawable.stf_ic_empty));
     }
 
     // error //
@@ -161,7 +160,11 @@ public class StatefulLayout
     }
 
     public void showError(String message, OnClickListener clickListener) {
-        showStateByType(ErrorStateType.ERROR, message, clickListener);
+        showCustom(new CustomStateOptions()
+                .message(message)
+                .image(R.drawable.stf_ic_error)
+                .buttonText(str(R.string.stfButtonText))
+                .buttonClickListener(clickListener));
     }
 
     // offline
@@ -175,7 +178,11 @@ public class StatefulLayout
     }
 
     public void showOffline(String message, OnClickListener clickListener) {
-        showStateByType(ErrorStateType.OFFLINE, message, clickListener);
+        showCustom(new CustomStateOptions()
+                .message(message)
+                .image(R.drawable.stf_ic_offline)
+                .buttonText(str(R.string.stfButtonText))
+                .buttonClickListener(clickListener));
     }
 
     // location off //
@@ -189,7 +196,11 @@ public class StatefulLayout
     }
 
     public void showLocationOff(String message, OnClickListener clickListener) {
-        showStateByType(ErrorStateType.LOCATION_OFF, message, clickListener);
+        showCustom(new CustomStateOptions()
+                .message(message)
+                .image(R.drawable.stf_ic_location_off)
+                .buttonText(str(R.string.stfButtonText))
+                .buttonClickListener(clickListener));
     }
 
     // custom //
@@ -200,59 +211,12 @@ public class StatefulLayout
      * @param options customization options
      * @see com.gturedi.views.CustomStateOptions
      */
-    public void showCustom(CustomStateOptions options) {
-        initSate();
-
-        if (options.getImageRes() != 0) {
-            stImage.setVisibility(VISIBLE);
-            stImage.setImageResource(options.getImageRes());
-        }
-
-        if (!TextUtils.isEmpty(options.getMessage())) {
-            stMessage.setVisibility(VISIBLE);
-            stMessage.setText(options.getMessage());
-        }
-
-        if (options.getClickListener() != null) {
-            stButton.setVisibility(VISIBLE);
-            stButton.setOnClickListener(options.getClickListener());
-            if (!TextUtils.isEmpty(options.getButtonText())) {
-                stButton.setText(options.getButtonText());
-            }
-        }
-    }
-
-    // helper methods //
-
-    private void showStateByType(ErrorStateType type, String message, OnClickListener clickListener) {
-        initSate();
-
-        stImage.setVisibility(VISIBLE);
-        stImage.setImageResource(type.imageRes);
-
-        stMessage.setVisibility(VISIBLE);
-        if (TextUtils.isEmpty(message)) {
-            stMessage.setText(type.messageRes);
-        } else {
-            stMessage.setText(message);
-        }
-
-        if (clickListener == null) {
-            stButton.setVisibility(GONE);
-        } else {
-            stButton.setVisibility(VISIBLE);
-            stButton.setOnClickListener(clickListener);
-        }
-    }
-
-    private void initSate() {
-        stProgress.setVisibility(GONE);
-        stImage.setVisibility(GONE);
-        stMessage.setVisibility(GONE);
-        stButton.setVisibility(GONE);
+    public void showCustom(final CustomStateOptions options) {
+        stContainer.clearAnimation();
+        content.clearAnimation();
 
         if (isAnimationEnabled()) {
-            if (stContainer.getVisibility() != VISIBLE) {
+            if (stContainer.getVisibility() == GONE) {
                 Animation outAnim = createOutAnimation();
                 outAnim.setAnimationListener(new CustomAnimationListener() {
                     @Override
@@ -263,10 +227,57 @@ public class StatefulLayout
                     }
                 });
                 content.startAnimation(outAnim);
+                state(options);
+            } else {
+                Animation outAnim = createOutAnimation();
+                outAnim.setAnimationListener(new CustomAnimationListener() {
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        state(options);
+                        stContainer.startAnimation(createInAnimation());
+                    }
+                });
+                stContainer.startAnimation(outAnim);
             }
         } else {
             content.setVisibility(GONE);
             stContainer.setVisibility(VISIBLE);
+            state(options);
+        }
+    }
+
+    // helper methods //
+
+    private void state(CustomStateOptions options) {
+        if (!TextUtils.isEmpty(options.getMessage())) {
+            stMessage.setVisibility(VISIBLE);
+            stMessage.setText(options.getMessage());
+        } else {
+            stMessage.setVisibility(GONE);
+        }
+
+        if (options.isLoading()) {
+            stProgress.setVisibility(VISIBLE);
+            stImage.setVisibility(GONE);
+            stButton.setVisibility(GONE);
+        } else {
+            stProgress.setVisibility(GONE);
+            if (options.getImageRes() != 0) {
+                stImage.setVisibility(VISIBLE);
+                stImage.setImageResource(options.getImageRes());
+            } else {
+                stImage.setVisibility(GONE);
+            }
+
+            if (options.getClickListener() != null) {
+                stButton.setVisibility(VISIBLE);
+                stButton.setOnClickListener(options.getClickListener());
+                if (!TextUtils.isEmpty(options.getButtonText())) {
+                    stButton.setText(options.getButtonText());
+                }
+            } else {
+                stButton.setVisibility(GONE);
+            }
         }
     }
 

@@ -13,12 +13,18 @@ import java.io.Serializable;
 public class CustomStateOptions implements Serializable {
 
     @DrawableRes private int imageRes;
+    private boolean isLoading;
     private String message;
     private String buttonText;
     private View.OnClickListener buttonClickListener;
 
     public CustomStateOptions image(@DrawableRes int val) {
         imageRes = val;
+        return this;
+    }
+
+    public CustomStateOptions loading() {
+        isLoading = true;
         return this;
     }
 
@@ -39,6 +45,10 @@ public class CustomStateOptions implements Serializable {
 
     public int getImageRes() {
         return imageRes;
+    }
+
+    public boolean isLoading() {
+        return isLoading;
     }
 
     public String getMessage() {
