@@ -30,17 +30,16 @@ public class StatefulLayout
     private static final int DEFAULT_IN_ANIM = android.R.anim.fade_in;
     private static final int DEFAULT_OUT_ANIM = android.R.anim.fade_out;
 
+    private boolean animationEnabled;
+    @AnimRes private int inAnimation;
+    @AnimRes private int outAnimation;
+
+    private View content;
     private LinearLayout stContainer;
     private ProgressBar stProgress;
     private ImageView stImage;
-    private View content;
     private TextView stMessage;
     private Button stButton;
-    private boolean animationEnabled;
-    @AnimRes
-    private int inAnimation;
-    @AnimRes
-    private int outAnimation;
 
     public StatefulLayout(Context context) {
         this(context, null);
@@ -227,6 +226,7 @@ public class StatefulLayout
 
     private void showStateByType(ErrorStateType type, String message, OnClickListener clickListener) {
         initSate();
+
         stImage.setVisibility(VISIBLE);
         stImage.setImageResource(type.imageRes);
 
