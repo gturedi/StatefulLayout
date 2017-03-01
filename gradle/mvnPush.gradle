@@ -18,15 +18,15 @@ apply plugin: 'maven'
 apply plugin: 'signing'
 
 def isReleaseBuild() {
-    return VERSION_NAME.contains("SNAPSHOT") == false
+    return POM_VERSION.contains("SNAPSHOT") == false
 }
 
 def getRepositoryUsername() {
-    return hasProperty('SONATYPE_NEXUS_USERNAME') ? SONATYPE_NEXUS_USERNAME : ""
+    return NEXUS_USERNAME
 }
 
 def getRepositoryPassword() {
-    return hasProperty('SONATYPE_NEXUS_PASSWORD') ? SONATYPE_NEXUS_PASSWORD : ""
+    return NEXUS_PASSWORD
 }
 
 afterEvaluate { project ->
@@ -35,9 +35,9 @@ afterEvaluate { project ->
             mavenDeployer {
                 beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
 
-                pom.groupId = GROUP
+                pom.groupId = POM_GROUP
                 pom.artifactId = POM_ARTIFACT_ID
-                pom.version = VERSION_NAME
+                pom.version = POM_VERSION
 
                 repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
                     authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
