@@ -76,7 +76,7 @@ Just override relevant resource in your app to customize state views appearance
 
 - To Override **styles** [styles.xml](library/src/main/res/values/styles.xml)
 
-- To Override **layout** [stateful_layout.xml](library/src/main/res/layout/stf_template.xml)
+- To Override **layout** [stf_template.xml](library/src/main/res/layout/stf_template.xml)
 
 ## License
     Copyright 2017 Gökhan Türedi (turedi.gokhan@gmail.com)
