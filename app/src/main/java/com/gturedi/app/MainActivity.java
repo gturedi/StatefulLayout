@@ -35,33 +35,33 @@ public class MainActivity
     }
 
     public void loading(View view) {
-        //stateful.showLoading();
+        stateful.showLoading();
         //stateful.showLoading(R.string.testMessage);
-        stateful.showLoading(getString(R.string.testMessage));
+        //stateful.showLoading(getString(R.string.testMessage));
     }
 
     public void empty(View view) {
-        //stateful.showEmpty();
+        stateful.showEmpty();
         //stateful.showEmpty(R.string.testMessage);
-        stateful.showEmpty(getString(R.string.testMessage));
+        //stateful.showEmpty(getString(R.string.testMessage));
     }
 
     public void error(View view) {
-        //stateful.showError(clickListener);
+        stateful.showError(clickListener);
         //stateful.showError(R.string.testMessage, clickListener);
-        stateful.showError(getString(R.string.testMessage), clickListener);
+        //stateful.showError(getString(R.string.testMessage), clickListener);
     }
 
     public void offline(View view) {
-        //stateful.showOffline(clickListener);
+        stateful.showOffline(clickListener);
         //stateful.showOffline(R.string.testMessage, clickListener);
-        stateful.showOffline(getString(R.string.testMessage), clickListener);
+        //stateful.showOffline(getString(R.string.testMessage), clickListener);
     }
 
     public void locationOff(View view) {
-        //stateful.showLocationOff(clickListener);
+        stateful.showLocationOff(clickListener);
         //stateful.showLocationOff(R.string.testMessage, clickListener);
-        stateful.showLocationOff(getString(R.string.testMessage), clickListener);
+        //stateful.showLocationOff(getString(R.string.testMessage), clickListener);
     }
 
     public void custom(View view) {

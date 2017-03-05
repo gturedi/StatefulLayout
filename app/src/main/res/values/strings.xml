@@ -1,4 +1,4 @@
 <resources>
-    <string name="appName">app</string>
+    <string name="appName">StatefulLayout Sample</string>
     <string name="testMessage">This just a simple test message</string>
 </resources>
