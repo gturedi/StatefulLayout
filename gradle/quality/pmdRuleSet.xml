@@ -10,6 +10,7 @@
         <exclude name="AtLeastOneConstructor"/>
         <exclude name="OnlyOneReturn"/>
         <exclude name="AvoidLiteralsInIfCondition"/>
+        <exclude name="DataflowAnomalyAnalysis"/>
     </rule>
     <rule ref="rulesets/java/controversial.xml/AvoidLiteralsInIfCondition">
         <properties>

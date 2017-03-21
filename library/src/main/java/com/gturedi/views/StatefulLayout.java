@@ -3,7 +3,6 @@ package com.gturedi.views;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.annotation.AnimRes;
-import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -11,7 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.*;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 /**
  * Android layout to show most common state templates like loading, empty, error etc. To do that all you need to is
@@ -26,9 +29,21 @@ public class StatefulLayout
     private static final int DEFAULT_IN_ANIM = android.R.anim.fade_in;
     private static final int DEFAULT_OUT_ANIM = android.R.anim.fade_out;
 
+    /**
+     * Indicates whether to place the animation on state changes
+     */
     private boolean animationEnabled;
+    /**
+     * Animation started begin of state change
+     */
     private Animation inAnimation;
+    /**
+     * Animation started end of state change
+     */
     private Animation outAnimation;
+    /**
+     * to synchronize transition animations when animation duration shorter then request of state change
+     */
     private int animCounter;
 
     private View content;
@@ -42,12 +57,12 @@ public class StatefulLayout
         this(context, null);
     }
 
-    public StatefulLayout(Context context, @Nullable AttributeSet attrs) {
+    public StatefulLayout(Context context, AttributeSet attrs) {
         super(context, attrs, 0);
         TypedArray array = context.getTheme().obtainStyledAttributes(attrs, R.styleable.stfStatefulLayout, 0, 0);
         animationEnabled = array.getBoolean(R.styleable.stfStatefulLayout_stfAnimationEnabled, DEFAULT_ANIM_ENABLED);
-        inAnimation = loadAnimation(array.getResourceId(R.styleable.stfStatefulLayout_stfInAnimation, DEFAULT_IN_ANIM));
-        outAnimation = loadAnimation(array.getResourceId(R.styleable.stfStatefulLayout_stfOutAnimation, DEFAULT_OUT_ANIM));
+        inAnimation = anim(array.getResourceId(R.styleable.stfStatefulLayout_stfInAnimation, DEFAULT_IN_ANIM));
+        outAnimation = anim(array.getResourceId(R.styleable.stfStatefulLayout_stfOutAnimation, DEFAULT_OUT_ANIM));
         array.recycle();
     }
 
@@ -68,7 +83,7 @@ public class StatefulLayout
     }
 
     public void setInAnimation(@AnimRes int anim) {
-        inAnimation = loadAnimation(anim);
+        inAnimation = anim(anim);
     }
 
     public Animation getOutAnimation() {
@@ -80,7 +95,7 @@ public class StatefulLayout
     }
 
     public void setOutAnimation(@AnimRes int anim) {
-        outAnimation = loadAnimation(anim);
+        outAnimation = anim(anim);
     }
 
     @Override
@@ -101,24 +116,21 @@ public class StatefulLayout
     // content //
 
     public void showContent() {
-        stContainer.clearAnimation();
-        content.clearAnimation();
-
         if (isAnimationEnabled()) {
+            stContainer.clearAnimation();
+            content.clearAnimation();
             final int animCounterCopy = ++animCounter;
             if (stContainer.getVisibility() == VISIBLE) {
-                Animation outAnim = outAnimation;
-                outAnim.setAnimationListener(new CustomAnimationListener() {
+                outAnimation.setAnimationListener(new CustomAnimationListener() {
                     @Override
                     public void onAnimationEnd(Animation animation) {
-                        if(animCounter != animCounterCopy)
-                            return;
+                        if (animCounter != animCounterCopy) return;
                         stContainer.setVisibility(GONE);
                         content.setVisibility(VISIBLE);
                         content.startAnimation(inAnimation);
                     }
                 });
-                stContainer.startAnimation(outAnim);
+                stContainer.startAnimation(outAnimation);
             }
         } else {
             stContainer.setVisibility(GONE);
@@ -221,28 +233,24 @@ public class StatefulLayout
      * @see com.gturedi.views.CustomStateOptions
      */
     public void showCustom(final CustomStateOptions options) {
-        stContainer.clearAnimation();
-        content.clearAnimation();
-
         if (isAnimationEnabled()) {
+            stContainer.clearAnimation();
+            content.clearAnimation();
             final int animCounterCopy = ++animCounter;
             if (stContainer.getVisibility() == GONE) {
-                Animation outAnim = outAnimation;
-                outAnim.setAnimationListener(new CustomAnimationListener() {
+                outAnimation.setAnimationListener(new CustomAnimationListener() {
                     @Override
                     public void onAnimationEnd(Animation animation) {
-                        if (animCounterCopy != animCounter)
-                            return;
+                        if (animCounterCopy != animCounter) return;
                         content.setVisibility(GONE);
                         stContainer.setVisibility(VISIBLE);
                         stContainer.startAnimation(inAnimation);
                     }
                 });
-                content.startAnimation(outAnim);
+                content.startAnimation(outAnimation);
                 state(options);
             } else {
-                Animation outAnim = outAnimation;
-                outAnim.setAnimationListener(new CustomAnimationListener() {
+                outAnimation.setAnimationListener(new CustomAnimationListener() {
                     @Override
                     public void onAnimationEnd(Animation animation) {
                         if (animCounterCopy != animCounter)
@@ -251,7 +259,7 @@ public class StatefulLayout
                         stContainer.startAnimation(inAnimation);
                     }
                 });
-                stContainer.startAnimation(outAnim);
+                stContainer.startAnimation(outAnimation);
             }
         } else {
             content.setVisibility(GONE);
@@ -299,7 +307,8 @@ public class StatefulLayout
         return getContext().getString(resId);
     }
 
-    private Animation loadAnimation(@AnimRes int resId) {
+    private Animation anim(@AnimRes int resId) {
         return AnimationUtils.loadAnimation(getContext(), resId);
     }
+
 }
