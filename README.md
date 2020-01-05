@@ -8,13 +8,27 @@ the target area(view) with StatefulLayout.
 ![alt text](sample.gif)
 
 ## Usage
-Add dependecy to app/build.gradle
+You can download it from jitpack.io
+```groovy
+allprojects {
+		repositories {
+			maven { url 'https://jitpack.io' }
+		}
+}
+dependencies {
+     compile 'com.github.gturedi:StatefulLayout:1.2.2'
+}
+```
+
+Alternatively you can use Sonatype Repository, add dependecy to app/build.gradle
 ```groovy
 dependencies {
      compile 'com.github.gturedi:stateful-layout:1.2.1'
 }
 ```
 Snapshots of the development version are available in [Sonatype's `snapshots` repository](https://oss.sonatype.org/content/repositories/snapshots/com/github/gturedi)
+
+```
 
 Then wrap a view which target area(view) to show states with StatefulLayout
 ```xml
