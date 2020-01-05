@@ -11,9 +11,9 @@ the target area(view) with StatefulLayout.
 You can download it from jitpack.io
 ```groovy
 allprojects {
-		repositories {
-			maven { url 'https://jitpack.io' }
-		}
+    repositories {
+        maven { url 'https://jitpack.io' }
+    }
 }
 dependencies {
      compile 'com.github.gturedi:StatefulLayout:1.2.2'
